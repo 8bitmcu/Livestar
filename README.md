@@ -1,3 +1,5 @@
 # Livestar
 
-An android live wallpaper with a space theme
+Livestar is a minimal, configurable starfield Live Wallpaper for Android devices.
+
+![assets/preview.gif](assets/preview.gif)
