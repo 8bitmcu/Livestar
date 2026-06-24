@@ -26,7 +26,7 @@ jobs:
         id: setup-ndk
         uses: android-actions/setup-android@v3
         with:
-          ndk-version: 'latest'
+          ndk-version: '30.0.14904198'
           cmake-version: '3.22.1'
 
       - name: Setup Rust
