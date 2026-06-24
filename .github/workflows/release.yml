@@ -22,12 +22,11 @@ jobs:
           java-version: '17'
           cache: 'gradle'
 
-      - name: Setup Android NDK
-        id: setup-ndk
-        uses: android-actions/setup-android@v3
+      - name: Setup Android SDK & NDK
+        id: setup-android
+        uses: android-actions/setup-android@v4
         with:
-          ndk-version: '30.0.14904198'
-          cmake-version: '3.22.1'
+          packages: 'tools platform-tools ndk;30.0.14904198 cmake;3.22.1'
 
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
@@ -50,13 +49,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cargo-
 
-      - name: Grant Execute Permission to Gradle Wrapper
-        run: chmod +x gradlew
-
       - name: Build Release APK
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleRelease
         env:
-          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
-        run: ./gradlew assembleRelease
+          ANDROID_NDK_HOME: ${{ env.ANDROID_HOME }}/ndk/30.0.14904198
 
       - name: Generate Release Tag
         id: tag
