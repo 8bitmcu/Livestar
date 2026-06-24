@@ -1,0 +1,50 @@
+plugins {
+    id 'com.android.application'
+    id 'org.mozilla.rust-android-gradle.rust-android'
+}
+
+android {
+    namespace 'com.livestar'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.livestar"
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName "0.1.0"
+
+        ndk {
+            abiFilters 'arm64-v8a', 'x86_64'
+        }
+    }
+
+    ndkVersion "30.0.14904198"
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+cargo {
+    module = "../rust"
+    libname = "livestar"
+    // Keep in sync with android.defaultConfig.ndk.abiFilters above.
+    targets = ["arm64", "x86_64"]
+    profile = "release"
+}
+
+// Build the Rust library before the JNI libs are merged into the APK.
+tasks.configureEach { task ->
+    if (task.name == 'mergeDebugJniLibFolders' || task.name == 'mergeReleaseJniLibFolders') {
+        task.dependsOn 'cargoBuild'
+    }
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Livestar</string>
+    <string name="wallpaper_description">A 3D space live wallpaper</string>
+    <string name="apply_wallpaper_button">Apply Live Wallpaper</string>
+    <string name="apply_wallpaper_unavailable">Couldn\'t open the live wallpaper picker on this device</string>
+    <string name="stars_section">Stars</string>
+    <string name="rendering_section">Rendering</string>
+    <string name="battery_saving">Battery savings mode</string>
+    <string name="density_label">Density: %1$d</string>
+    <string name="size_min_label">Min star size: %1$.1f px</string>
+    <string name="size_max_label">Max star size: %1$.1f px</string>
+    <string name="brightness_label">Brightness factor: %1$.2f</string>
+    <string name="twinkle_label">Twinkling stars: %1$d%%</string>
+    <string name="fps_label">Target FPS: %1$d</string>
+</resources>
